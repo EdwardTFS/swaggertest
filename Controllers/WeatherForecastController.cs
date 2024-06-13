@@ -29,4 +29,14 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
+    [HttpPost]
+    public WeatherForecast Reply(PostData postData)
+    {
+        return new WeatherForecast{
+            Date = postData.Date ?? DateTime.Now,
+            Summary = postData.Summary ?? "test",
+            TemperatureC = postData.TemperatureC + 1,
+        };
+    }
 }
