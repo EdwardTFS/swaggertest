@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace swaggertest;
 
 public class Program
@@ -20,12 +24,9 @@ public class Program
 
 
 
-        app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapGet("/", async context =>
-                await context.Response.WriteAsync(@$"<html><body><h1>Swagger Test</h1><a href=""swagger"">swagger</a></body></html>"));
-        });
+        
+        app.MapGet("/", async context => await context.Response.WriteAsync(@$"<html><body><h1>Swagger Test</h1><a href=""swagger"">swagger</a></body></html>"));
+        
         app.MapControllers();
 
         app.Run();

@@ -1,3 +1,5 @@
+using System;
+
 namespace swaggertest;
 
 public class WeatherForecast
