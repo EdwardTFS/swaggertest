@@ -8,6 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="NSwag.AspNetCore" Version="14.0.8" />
+    <PackageReference Include="NSwag.MSBuild" Version="14.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
+
+  <Target Name="NSwag" AfterTargets="Build">
+	  <Copy SourceFiles="@(ReferencePath)" DestinationFolder="$(OutDir)References" />
+	  <Exec Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration),OutDir=$(OutDir)" />
+	  <RemoveDir Directories="$(OutDir)References" />
+  </Target>
 
 </Project>
